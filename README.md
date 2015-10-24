@@ -1,2 +1,5 @@
-# personal-convert
-Simple tool for generate something in our office.
+## Personal Convert
+
+Tool sederhana untuk keperluan di kantor kami.
+
+rohmadsasmito@gmail.com
