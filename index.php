@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="img/favicon.png">
-    <title>Convert Excel to Seed Format</title>
+    <title>Personal Convert - Tool Generate in KodeSoft</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -28,7 +28,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Excel to Seed</a>
+            <a class="navbar-brand" href="#">Personal Convert</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -60,7 +60,7 @@
                         <input type="text" name="tbl_name" id="tbl_name" class="form-control" placeholder="Nama tabel"
                                required="required"/>
                         <button id="btn_csv" name="submit" type="submit" class="btn btn-primary btn-lg">
-                            Convert to Excel
+                            Convert to Seed
                         </button>
                     </div>
                 </form>

@@ -11,6 +11,7 @@ Info:
 Atau bisa menggunakan cmd tanpa harus setting konfigurasi server local:
 - `cd personal-convert`
 - `php -S localhost:9090`
+- `buka browser localhost:9090`
 
 
 rohmadsasmito@gmail.com
