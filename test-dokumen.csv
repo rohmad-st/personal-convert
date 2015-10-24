@@ -1,0 +1,5 @@
+_id,nama,email,is_active,level,organisasi_id
+bb341e8b-b625-4039-844d-e18d2bbe18f6,Edi Santoso,edi@app.dev,1,210,
+a1f09011-4ee4-4ef5-85c0-235b08738a71,Admin FrontOffice,admin_satu@simdes-ambon.com,1,1,a1f09011-4ee4-4ef5-85c0-235b08738a71
+bb341e8b-b625-4039-0002-e18d2bbe18f6,Admin BackOffice,admin_dua@simdes-ambon.com,1,210,
+bb341e8b-b625-4029-844d-e18d2bbe18f6,Iwan Riwayanto,iwan@appdev.com,1,1,f9e66a2f-733a-41f5-9457-d348219ef74e

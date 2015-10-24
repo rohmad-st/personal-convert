@@ -1,0 +1,23 @@
+.actions {
+    margin-top: 10px !important;
+}
+
+.form-group #csv {
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    min-height: 50px;
+    background-color: transparent;
+    width: 600px;
+    margin-right: 10px;
+}
+
+.form-group #btn_csv {
+    margin-top: -5px;
+    margin-left: 15px
+}
+
+.form-group #tbl_name {
+    width: 300px;
+    min-height: 50px;
+    margin-bottom: 5px;
+}
