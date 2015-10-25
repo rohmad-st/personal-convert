@@ -1,0 +1,167 @@
+<?php namespace AppDesa\Repositories\Eloquent\{{namespace}};
+
+use AppDesa\Models\{{namespace}};
+use AppDesa\Repositories\Eloquent\AbstractRepository;
+use AppDesa\Repositories\RepositoryInterface\{{namespace}}\{{namespace}}Interface;
+use AppDesa\Services\Cache\CacheInterface;
+use AppDesa\Services\Forms\PejabatDesa\{{namespace}}CreateForm;
+
+/**
+ * Class {{namespace}}Repository
+ * @package AppDesa\Repositories\Eloquent\{{namespace}}
+ */
+class {{namespace}}Repository extends AbstractRepository implements {{namespace}}Interface
+{
+
+    /**
+     * @var CacheInterface
+     */
+    protected $cache;
+
+    /**
+     * instance interface
+     *
+     * @param {{namespace}} ${{var_namespace}}
+     * @param CacheInterface $cache
+     */
+    public function __construct({{namespace}} ${{var_namespace}}, CacheInterface $cache)
+    {
+        $this->model = ${{var_namespace}};
+        $this->cache = $cache;
+    }
+
+    /**
+     * find data {{var_comment}}
+     *
+     * @param  $page
+     * @param  $limit
+     * @param  $term
+     *
+     * @return mixed
+     */
+    public function find($page = 1, $limit = 10, $term = null)
+    {
+        // set key
+        $key = '{{var_tags}}-find-' . $page . $limit . $term;
+
+        // has section and key
+        if ($this->cache->has({{namespace}}::$section, $key)) {
+            return $this->cache->get({{namespace}}::$section, $key);
+        }
+
+        // query to database
+        ${{var_namespace}} = $this->model
+            ->orderBy('created_at', 'desc')
+            ->FullTextSearch($term)
+            ->paginate($limit)
+            ->toArray();
+
+        // store to cache
+        $this->cache->put({{namespace}}::$section, $key, ${{var_namespace}}, 10);
+
+        return ${{var_namespace}};
+    }
+
+    /**
+     * Get {{var_comment}}
+     *
+     * @param $id
+     *
+     * @return \Illuminate\Support\Collection|static
+     */
+    public function findById($id)
+    {
+        return $this->model->find($id);
+    }
+
+    /**
+     * Store new {{var_comment}}
+     *
+     * @param array $data
+     *
+     * @return mixed
+     */
+    public function create(array $data)
+    {
+        try {
+            ${{var_namespace}} = $this->getNew();
+
+            {{var_field}}
+
+            ${{var_namespace}}->save();
+
+            return $this->successInsertResponse();
+
+        } catch (\Exception $ex) {
+            \Log::error('{{namespace}}Repository create action something wrong -' . $ex);
+
+            return $this->errorInsertResponse();
+        }
+    }
+
+    /**
+     * Update {{var_comment}}
+     *
+     * @param {{namespace}} ${{var_namespace}}
+     * @param array $data
+     *
+     * @return mixed
+     */
+    public function update({{namespace}} ${{var_namespace}}, array $data)
+    {
+        try {
+            {{var_field}}
+            ${{var_namespace}}->save();
+
+            return $this->successUpdateResponse();
+
+        } catch (\Exception $ex) {
+            \Log::error('{{namespace}}Repository update action something wrong -' . $ex);
+
+            return $this->errorUpdateResponse();
+        }
+    }
+
+    /**
+     * Delete {{var_comment}}
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function destroy($id)
+    {
+        try {
+            ${{var_namespace}} = $this->findById($id);
+
+            if (${{var_namespace}}) {
+                ${{var_namespace}}->delete();
+
+                return $this->successDeleteResponse();
+            }
+
+            return $this->successResponseOk([
+                'success' => false,
+                'message' => [
+                    'msg' => 'Record sudah tidak ada atau sudah dihapus.',
+                ],
+            ]);
+
+        } catch (\Exception $ex) {
+            \Log::error('{{namespace}}Repository destroy action something wrong -' . $ex);
+
+            return $this->errorDeleteResponse();
+        }
+    }
+
+    /**
+     * Get input {{var_comment}}
+     *
+     * @return {{namespace}}CreateForm
+     */
+    public function getCreationForm()
+    {
+        return new {{namespace}}CreateForm();
+    }
+
+}

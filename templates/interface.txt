@@ -1,0 +1,63 @@
+<?php namespace AppDesa\Repositories\RepositoryInterface\{{namespace}};
+
+use AppDesa\Models\{{namespace}};
+
+interface {{namespace}}Interface
+{
+
+    /**
+     * find data
+     *
+     * @param  $page
+     * @param  $limit
+     * @param  $term
+     *
+     * @return mixed
+     */
+    public function find($page, $limit, $term);
+
+    /**
+     * Get a {{var_comment}}
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function findById($id);
+
+    /**
+     * Store a new {{var_comment}}
+     *
+     * @param array $data
+     *
+     * @return mixed
+     */
+    public function create(array $data);
+
+    /**
+     * Update {{var_comment}}
+     *
+     * @param {{namespace}} ${{var_namespace}}
+     * @param array $data
+     *
+     * @return mixed
+     */
+    public function update({{namespace}} ${{var_namespace}}, array $data);
+
+    /**
+     * Delete a {{var_comment}}
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function destroy($id);
+
+    /**
+     * Get creation form {{var_comment}}
+     *
+     * @return mixed
+     */
+    public function getCreationForm();
+
+}

@@ -16,38 +16,26 @@
     <![endif]-->
 </head>
 <body>
-<!-- navbar -->
-<nav class="navbar navbar-default navbar-static-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Excel to Seed</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/">Seed</a></li>
-                <li class="active"><a href="fpdf.php">Fpdf</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<?php require('inc/navbar.php'); ?>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="well">
                 <h2>Warning!</h2>
 
-                <p>Sorry, This page are currently under Maintenance.</p>
+                <p>Generate Cetak PDF menggunakan library FPDF.</p>
+                <hr>
+                <p style="font-weight: bold;"><i>Sorry, This page are currently under Maintenance.</i></p>
             </div>
         </div>
     </div>
 </div>
+<script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#nav_fpdf').addClass('active');
+    });
+</script>
 </body>
 </html>

@@ -16,8 +16,18 @@
     margin-left: 15px
 }
 
-.form-group #tbl_name {
+.form-group .input-expand {
     width: 300px;
     min-height: 50px;
+    margin-bottom: 5px;
+}
+
+.form-group .input-expand-sm {
+    width: 300px;
+    margin-bottom: 5px;
+}
+
+.form-group .input-expand-wd {
+    width: 485px;
     margin-bottom: 5px;
 }

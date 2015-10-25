@@ -1,0 +1,122 @@
+<?php namespace Controllers\Api\V1\{{namespace}};
+
+use AppDesa\Repositories\RepositoryInterface\{{namespace}}\{{namespace}}Interface;
+use Controllers\BaseController;
+
+/**
+ * Class {{namespace}}Controller
+ * @package Controllers\Api\V1\{{namespace}}
+ */
+class {{namespace}}Controller extends BaseController
+{
+
+    /**
+     * @var {{namespace}}Interface
+     */
+    protected ${{var_namespace}};
+
+    /**
+     * @param {{namespace}}Interface ${{var_namespace}}
+     */
+    public function __construct({{namespace}}Interface ${{var_namespace}})
+    {
+        parent::__construct();
+        $this->beforeFilter('auth');
+        $this->beforeFilter('frontoffice', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+
+        $this->{{var_namespace}} = ${{var_namespace}};
+    }
+
+    /**
+     * @return mixed
+     */
+    public function index()
+    {
+        $term = $this->input('term');
+        $page = $this->input('page');
+
+        return $this->{{var_namespace}}->find($page, $limit = 10, $term);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function show($id)
+    {
+        return $this->{{var_namespace}}->findById($id);
+    }
+
+    /**
+     * Insert {{var_comment}}
+     *
+     * @return mixed
+     */
+    public function store()
+    {
+        $form = $this->{{var_namespace}}->getCreationForm();
+
+        if (!$form->isValid($form->attributes)) {
+            $message = $form->getErrors();
+
+            return $this->errorResponse([
+                'success' => false,
+                'message' => [
+                    {{var_field}}
+                ]
+            ]);
+        }
+
+        $data = $form->getInputData();
+        $data['user_id'] = $this->getUserId();
+        $data['organisasi_id'] = $this->getOrganisasiId();
+
+        return $this->{{var_namespace}}->create($data);
+    }
+
+    /**
+     * Update {{var_comment}}
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function update($id)
+    {
+        ${{var_namespace}} = $this->{{var_namespace}}->findById($id);
+        if (!${{var_namespace}}) {
+            return $this->recordNotFound();
+        }
+        $form = $this->{{var_namespace}}->getCreationForm();
+
+        if (!$form->isValid($form->attributes)) {
+            $message = $form->getErrors();
+
+            return $this->errorResponse([
+                'success' => false,
+                'message' => [
+                    {{var_field}}
+                ]
+            ]);
+        }
+
+        $data = $form->getInputData();
+        $data['user_id'] = $this->getUserId();
+
+        return $this->{{var_namespace}}->update(${{var_namespace}}, $data);
+    }
+
+    /**
+     * delete {{var_comment}}
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function destroy($id)
+    {
+        return $this->{{var_namespace}}->destroy($id);
+    }
+
+}

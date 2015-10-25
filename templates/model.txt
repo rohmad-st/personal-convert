@@ -1,0 +1,117 @@
+<?php namespace AppDesa\Models;
+
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
+
+class {{namespace}} extends UuidModel
+{
+
+    use SoftDeletingTrait;
+
+    /**
+     * Section for redis storage
+     *
+     * @var string
+     */
+    public static $section = '{{var_tags}}';
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+
+    protected $dates = ['deleted_at'];
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = '{{var_table}}';
+
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var string
+     */
+    protected $with = ['organisasi'];
+
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'user_creator',
+        'user_updater'
+    ];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        {{var_fillable}}
+    ];
+
+    /**
+     * Primary Key by the table
+     *
+     * @var string
+     */
+    protected $primaryKey = '_id';
+
+    /**
+     * Boot the Model
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        /**
+         * Attach to the 'creating' Model Event to provide a UUID
+         * for the `id` field (provided by $model->getKeyName())
+         */
+        static::creating(function ($model) {
+            // flush the cache section
+            \Cache::section({{namespace}}::$section)->flush();
+        });
+
+        static::updating(function ($model) {
+            // flush the cache section
+            \Cache::section({{namespace}}::$section)->flush();
+        });
+
+        static::deleting(function ($model) {
+            // flush the cache section
+            \Cache::section({{namespace}}::$section)->flush();
+        });
+    }
+
+    /**
+     *  Scope Full Text Search
+     *
+     * @param $query
+     * @param $q
+     *
+     * @return mixed
+     */
+    public function scopeFullTextSearch($query, $q)
+    {
+        return empty($q) ? $query : $query->whereRaw("MATCH({{var_search}})AGAINST(? IN BOOLEAN MODE)", [$q]);
+    }
+
+    /**
+     * Define an inverse one-to-one or many relationship.
+     *
+     * @return mixed
+     */
+    public function organisasi()
+    {
+        return $this->belongsTo('AppDesa\Models\Organisasi', 'organisasi_id');
+    }
+}

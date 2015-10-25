@@ -71,13 +71,11 @@ function replaceString($string, $table = null)
     $patterns = ['/": "/', '/{/', '/}/'];
     $replacements = ['" => "', '[', ']'];
 
-    $addText = '$data = ';
     $tableName = empty($table) ? 'nama_tabel' : $table;
 
     // add string text
-    $str = '$data';
     $res = preg_replace($patterns, $replacements, $string);
-    $hasil = "// truncate record\nDB::table('" . $tableName . "')->truncate();\n\n" . $addText . $res . ";\n\n// insert batch\nDB::table('" . $tableName . "')->insert(" . $str . ");";
+    $hasil = "// truncate record\nDB::table('" . $tableName . "')->truncate();\n\n\$data"  . $res . ";\n\n// insert batch\nDB::table('" . $tableName . "')->insert(\$data);";
 
     return $hasil;
 }

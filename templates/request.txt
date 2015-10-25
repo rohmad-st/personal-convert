@@ -1,0 +1,37 @@
+<?php namespace AppDesa\Services\Forms\{{namespace}};
+
+use AppDesa\Services\Forms\AbstractForm;
+
+class {{namespace}}CreateForm extends AbstractForm
+{
+
+    /**
+     * The validation rules to validate the input data against.
+     *
+     * @var array
+     */
+    protected $rules = [
+        {{var_rules}}
+    ];
+
+    /**
+     * Set Instance Attributes Names
+     *
+     * @var array
+     */
+    public $attributes = [
+        {{var_attributes}}
+    ];
+
+    /**
+     * Get the prepared input data.
+     *
+     * @return array
+     */
+    public function getInputData()
+    {
+        return array_only($this->inputData, [
+            {{var_input}}
+        ]);
+    }
+}

@@ -1,4 +1,3 @@
-<?php require('convert.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="img/favicon.png">
-    <title>Personal Convert - Tool Generate in KodeSoft</title>
+    <title>Personal Convert - Convert CSV to Seeder Laravel</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -17,34 +16,17 @@
     <![endif]-->
 </head>
 <body>
-<!-- navbar -->
-<nav class="navbar navbar-default navbar-static-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Personal Convert</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Seed</a></li>
-                <li><a href="fpdf.php">Fpdf</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<?php
+require('inc/convert.php');
+require('inc/navbar.php');
+?>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="well">
                 <h2>INFO</h2>
 
-                <p>Convert file CSV(excel) menjadi sesuai format Seed Laravel.</p>
+                <p>Convert file CSV (excel) kedalam bentuk format Seed Laravel.</p>
             </div>
         </div>
     </div>
@@ -57,7 +39,7 @@
                       enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="file" name="csv" id="csv" class="form-control" required="required"/>
-                        <input type="text" name="tbl_name" id="tbl_name" class="form-control" placeholder="Nama tabel"
+                        <input type="text" name="tbl_name" id="tbl_name" class="form-control input-expand" placeholder="Nama tabel"
                                required="required"/>
                         <button id="btn_csv" name="submit" type="submit" class="btn btn-primary btn-lg">
                             Convert to Seed
@@ -96,6 +78,8 @@
     var ht = $('#holdtext');
 
     $(document).ready(function () {
+        $('#nav_seed').addClass('active');
+
         var tx = ht.val();
         if (tx != null && tx != 'Array' && tx != '') {
             // select textarea

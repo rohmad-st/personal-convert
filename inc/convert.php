@@ -1,5 +1,5 @@
 <?php
-include('GlobalFunc.php');
+include('global_func.php');
 set_error_handler("errorMessage");
 
 $hasilAkhir = '';
