@@ -21,5 +21,5 @@ Atau bisa menggunakan cmd tanpa harus setting konfigurasi server local:
 
 Contact Person: 
 - rohmadsasmito@gmail.com
-- fb.me/rohmad.sasmito
+- [Facebook](https://facebook.com/rohmad.sasmito)
 
