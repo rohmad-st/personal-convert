@@ -2,6 +2,11 @@
 
 Tool sederhana untuk keperluan di kantor kami.
 
+Fitur:
+- convert file CSV ke bentuk Seeder laravel
+- generate migrate, controller, interface, repository, request, model for laravel 4.2 (code sesuai standart di kantor)
+- generate fpdf (under maintenance)
+
 Info:
 - untuk contoh template formulir yang digunakan ada di `test-dokumen.csv`
 - pastikan dokumen yang di generate hanya yang tipenya `CSV`
@@ -14,4 +19,7 @@ Atau bisa menggunakan cmd tanpa harus setting konfigurasi server local:
 - `buka browser localhost:9090`
 
 
-rohmadsasmito@gmail.com
+Contact Person: 
+- rohmadsasmito@gmail.com
+- fb.me/rohmad.sasmito
+
