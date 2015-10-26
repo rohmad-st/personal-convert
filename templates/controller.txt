@@ -1,11 +1,11 @@
-<?php namespace Controllers\Api\V1\{{namespace}};
+<?php namespace Controllers\Api\V1\{{prefix}};
 
-use AppDesa\Repositories\RepositoryInterface\{{namespace}}\{{namespace}}Interface;
+use AppDesa\Repositories\RepositoryInterface\{{prefix}}\{{namespace}}Interface;
 use Controllers\BaseController;
 
 /**
  * Class {{namespace}}Controller
- * @package Controllers\Api\V1\{{namespace}}
+ * @package Controllers\Api\V1\{{prefix}}
  */
 class {{namespace}}Controller extends BaseController
 {

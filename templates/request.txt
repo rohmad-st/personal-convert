@@ -1,4 +1,4 @@
-<?php namespace AppDesa\Services\Forms\{{namespace}};
+<?php namespace AppDesa\Services\Forms\{{prefix}};
 
 use AppDesa\Services\Forms\AbstractForm;
 

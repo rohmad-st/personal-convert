@@ -1,14 +1,14 @@
-<?php namespace AppDesa\Repositories\Eloquent\{{namespace}};
+<?php namespace AppDesa\Repositories\Eloquent\{{prefix}};
 
 use AppDesa\Models\{{namespace}};
 use AppDesa\Repositories\Eloquent\AbstractRepository;
-use AppDesa\Repositories\RepositoryInterface\{{namespace}}\{{namespace}}Interface;
+use AppDesa\Repositories\RepositoryInterface\{{prefix}}\{{namespace}}Interface;
 use AppDesa\Services\Cache\CacheInterface;
-use AppDesa\Services\Forms\PejabatDesa\{{namespace}}CreateForm;
+use AppDesa\Services\Forms\PejabatDesa\{{prefix}}CreateForm;
 
 /**
  * Class {{namespace}}Repository
- * @package AppDesa\Repositories\Eloquent\{{namespace}}
+ * @package AppDesa\Repositories\Eloquent\{{prefix}}
  */
 class {{namespace}}Repository extends AbstractRepository implements {{namespace}}Interface
 {

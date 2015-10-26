@@ -49,7 +49,7 @@ function CmdMigrate(array $data, $namespace)
 }
 
 // generate controller
-function CmdController(array $data, $namespace)
+function CmdController(array $data, $namespace, $prefix)
 {
     // field for params msg validate
     $result = '';
@@ -73,7 +73,7 @@ function CmdController(array $data, $namespace)
     while ($line = fgets($fh)) {
 
         // replace character
-        $txtRead .= RegexController($line, $namespace, $result);
+        $txtRead .= RegexController($line, $namespace, $result, $prefix);
     }
 
     fclose($fh);
@@ -83,7 +83,7 @@ function CmdController(array $data, $namespace)
 }
 
 // generate interface
-function CmdInterface($namespace)
+function CmdInterface($namespace, $prefix)
 {
     // open templates
     $template = 'templates/interface.txt';
@@ -93,7 +93,7 @@ function CmdInterface($namespace)
     while ($line = fgets($fh)) {
 
         // replace character
-        $txtRead .= RegexInterface($line, $namespace);
+        $txtRead .= RegexInterface($line, $namespace, $prefix);
     }
 
     fclose($fh);
@@ -103,7 +103,7 @@ function CmdInterface($namespace)
 }
 
 // generate repository
-function CmdRepository(array $data, $namespace)
+function CmdRepository(array $data, $namespace, $prefix)
 {
     // field for params insert
     $result = '';
@@ -127,7 +127,7 @@ function CmdRepository(array $data, $namespace)
     while ($line = fgets($fh)) {
 
         // replace character
-        $txtRead .= RegexRepository($line, $namespace, $result);
+        $txtRead .= RegexRepository($line, $namespace, $result, $prefix);
     }
 
     fclose($fh);
@@ -177,7 +177,7 @@ function CmdModel(array $data, $namespace)
 }
 
 // generate request/ validation
-function CmdRequest(array $data, $namespace)
+function CmdRequest(array $data, $namespace, $prefix)
 {
     // field for params msg validate
     $res_rules = '';
@@ -231,7 +231,7 @@ function CmdRequest(array $data, $namespace)
     while ($line = fgets($fh)) {
 
         // replace character
-        $txtRead .= RegexRequest($line, $namespace, $res_rules, $res_attr, $res_input);
+        $txtRead .= RegexRequest($line, $namespace, $res_rules, $res_attr, $res_input, $prefix);
     }
 
     fclose($fh);
@@ -252,33 +252,33 @@ function RegexMigrate($str, $namespace, $field)
 }
 
 // method regex laravel templates for templates controller
-function RegexController($str, $namespace, $field)
+function RegexController($str, $namespace, $field, $prefix)
 {
 
-    $patterns = ['/{{namespace}}/', '/{{var_namespace}}/', '/{{var_comment}}/', '/{{var_field}}/'];
-    $replacements = [fixNamescape($namespace, 1), fixNamescape($namespace, 2), fixNamescape($namespace, 3), $field];
+    $patterns = ['/{{namespace}}/', '/{{var_namespace}}/', '/{{var_comment}}/', '/{{var_field}}/', '/{{prefix}}/'];
+    $replacements = [fixNamescape($namespace, 1), fixNamescape($namespace, 2), fixNamescape($namespace, 3), $field, fixNamescape($prefix, 1)];
 
     // add string text
     return preg_replace($patterns, $replacements, $str);
 }
 
 // method regex laravel templates for templates interface
-function RegexInterface($str, $namespace)
+function RegexInterface($str, $namespace, $prefix)
 {
 
-    $patterns = ['/{{namespace}}/', '/{{var_namespace}}/', '/{{var_comment}}/'];
-    $replacements = [fixNamescape($namespace, 1), fixNamescape($namespace, 2), fixNamescape($namespace, 3)];
+    $patterns = ['/{{namespace}}/', '/{{var_namespace}}/', '/{{var_comment}}/', '/{{prefix}}/'];
+    $replacements = [fixNamescape($namespace, 1), fixNamescape($namespace, 2), fixNamescape($namespace, 3), fixNamescape($prefix, 1)];
 
     // add string text
     return preg_replace($patterns, $replacements, $str);
 }
 
 // method regex laravel templates for templates repository
-function RegexRepository($str, $namespace, $field)
+function RegexRepository($str, $namespace, $field, $prefix)
 {
 
-    $patterns = ['/{{namespace}}/', '/{{var_namespace}}/', '/{{var_comment}}/', '/{{var_tags}}/', '/{{var_field}}/'];
-    $replacements = [fixNamescape($namespace, 1), fixNamescape($namespace, 2), fixNamescape($namespace, 3), fixNamescape($namespace, 4), $field];
+    $patterns = ['/{{namespace}}/', '/{{var_namespace}}/', '/{{var_comment}}/', '/{{var_tags}}/', '/{{var_field}}/', '/{{prefix}}/'];
+    $replacements = [fixNamescape($namespace, 1), fixNamescape($namespace, 2), fixNamescape($namespace, 3), fixNamescape($namespace, 4), $field, fixNamescape($prefix, 1)];
 
     // add string text
     return preg_replace($patterns, $replacements, $str);
@@ -312,20 +312,22 @@ function RegexModel($str, $namespace, $field, $search)
 }
 
 // method regex laravel templates for templates request
-function RegexRequest($str, $namespace, $rules, $attr, $input)
+function RegexRequest($str, $namespace, $rules, $attr, $input, $prefix)
 {
 
     $patterns = [
         '/{{namespace}}/',
         '/{{var_rules}}/',
         '/{{var_attributes}}/',
-        '/{{var_input}}/'
+        '/{{var_input}}/',
+        '/{{prefix}}/'
     ];
     $replacements = [
         fixNamescape($namespace, 1),
         $rules,
         $attr,
-        $input
+        $input,
+        fixNamescape($prefix, 1)
     ];
 
     // add string text

@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     switch ($tipe_generate) {
         case 1:
             // Generate on page
-            $hasil = GenerateOnPage($process, $lastResult, $namespace);
+            $hasil = GenerateOnPage($process, $lastResult, $namespace, $prefix);
             $resultMigrate = $hasil['resultMigrate'];
             $resultController = $hasil['resultController'];
             $resultInterface = $hasil['resultInterface'];
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-function GenerateOnPage($process, $lastResult, $namespace)
+function GenerateOnPage($process, $lastResult, $namespace, $prefix)
 {
     $resultMigrate = '';
     $resultController = '';
@@ -76,19 +76,19 @@ function GenerateOnPage($process, $lastResult, $namespace)
             break;
 
         case 'con':
-            $resultController = CmdController($lastResult, $namespace);
+            $resultController = CmdController($lastResult, $namespace, $prefix);
             break;
 
         case 'int':
-            $resultInterface = CmdInterface($namespace);
+            $resultInterface = CmdInterface($namespace, $prefix);
             break;
 
         case 'rep':
-            $resultRepository = CmdRepository($lastResult, $namespace);
+            $resultRepository = CmdRepository($lastResult, $namespace, $prefix);
             break;
 
         case 'req':
-            $resultRequest = CmdRequest($lastResult, $namespace);
+            $resultRequest = CmdRequest($lastResult, $namespace, $prefix);
             break;
 
         case 'mod':
@@ -97,10 +97,10 @@ function GenerateOnPage($process, $lastResult, $namespace)
 
         case 'all':
             $resultMigrate = CmdMigrate($lastResult, $namespace);
-            $resultController = CmdController($lastResult, $namespace);
-            $resultInterface = CmdInterface($namespace);
-            $resultRepository = CmdRepository($lastResult, $namespace);
-            $resultRequest = CmdRequest($lastResult, $namespace);
+            $resultController = CmdController($lastResult, $namespace, $prefix);
+            $resultInterface = CmdInterface($namespace, $prefix);
+            $resultRepository = CmdRepository($lastResult, $namespace, $prefix);
+            $resultRequest = CmdRequest($lastResult, $namespace, $prefix);
             $resultModel = CmdModel($lastResult, $namespace);
             break;
 
@@ -166,22 +166,22 @@ function GenerateToDir($process, $lastResult, $namespace, $prefix)
             break;
 
         case 'con':
-            $string = CmdController($lastResult, $namespace);
+            $string = CmdController($lastResult, $namespace, $prefix);
             $resultController = CreateWriteFile($loc_controller, $nm_controller, $string);
             break;
 
         case 'int':
-            $string = CmdInterface($namespace);
+            $string = CmdInterface($namespace, $prefix);
             $resultInterface = CreateWriteFile($loc_interface, $nm_interface, $string);
             break;
 
         case 'rep':
-            $string = CmdRepository($lastResult, $namespace);
+            $string = CmdRepository($lastResult, $namespace, $prefix);
             $resultRepository = CreateWriteFile($loc_repository, $nm_repository, $string);
             break;
 
         case 'req':
-            $string = CmdRequest($lastResult, $namespace);
+            $string = CmdRequest($lastResult, $namespace, $prefix);
             $resultRequest = CreateWriteFile($loc_request, $nm_request, $string);
             break;
 
@@ -194,16 +194,16 @@ function GenerateToDir($process, $lastResult, $namespace, $prefix)
             $string = CmdMigrate($lastResult, $namespace);
             $resultMigrate = CreateWriteFile($loc_migrate, $nm_migrate, $string);
 
-            $string = CmdController($lastResult, $namespace);
+            $string = CmdController($lastResult, $namespace, $prefix);
             $resultController = CreateWriteFile($loc_controller, $nm_controller, $string);
 
-            $string = CmdInterface($namespace);
+            $string = CmdInterface($namespace, $prefix);
             $resultInterface = CreateWriteFile($loc_interface, $nm_interface, $string);
 
-            $string = CmdRepository($lastResult, $namespace);
+            $string = CmdRepository($lastResult, $namespace, $prefix);
             $resultRepository = CreateWriteFile($loc_repository, $nm_repository, $string);
 
-            $string = CmdRequest($lastResult, $namespace);
+            $string = CmdRequest($lastResult, $namespace, $prefix);
             $resultRequest = CreateWriteFile($loc_request, $nm_request, $string);
 
             $string = CmdModel($lastResult, $namespace);

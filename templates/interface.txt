@@ -1,4 +1,4 @@
-<?php namespace AppDesa\Repositories\RepositoryInterface\{{namespace}};
+<?php namespace AppDesa\Repositories\RepositoryInterface\{{prefix}};
 
 use AppDesa\Models\{{namespace}};
 
