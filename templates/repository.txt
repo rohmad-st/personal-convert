@@ -4,7 +4,7 @@ use AppDesa\Models\{{namespace}};
 use AppDesa\Repositories\Eloquent\AbstractRepository;
 use AppDesa\Repositories\RepositoryInterface\{{prefix}}\{{namespace}}Interface;
 use AppDesa\Services\Cache\CacheInterface;
-use AppDesa\Services\Forms\PejabatDesa\{{prefix}}CreateForm;
+use AppDesa\Services\Forms\{{prefix}}\{{namespace}}CreateForm;
 
 /**
  * Class {{namespace}}Repository
