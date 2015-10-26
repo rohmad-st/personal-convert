@@ -43,6 +43,8 @@ require('inc/navbar.php');
                             <input type="hidden" id="def_length" name="def_length" value="1">
                             <input type="hidden" id="is_process" name="is_process" value="all">
                             <input type="hidden" id="namespace" name="namespace">
+                            <!-- Type Generate 1: on this page; 2= create to app -->
+                            <input type="hidden" id="tipe_generate" name="tipe_generate" value="1">
 
                             <div id="frm_def_ls_1">
                                 <input id="def_name_1" name="def_name_1" type="text"
@@ -112,8 +114,12 @@ require('inc/navbar.php');
                         <input id="proc_namespace" name="proc_namespace" type="text" class="form-control input-expand"
                                placeholder="Namespace" required="required" style="margin-right: 10px">
                         <button name="generate" id="generate" type="button" class="btn btn-primary btn-lg"
-                                style="margin-top: -5px">
+                                style="margin-top: -5px; margin-right: 5px">
                             Start Generate
+                        </button>
+                        <button name="create" id="create" type="button" class="btn btn-success btn-lg"
+                                style="margin-top: -5px">
+                            Create to App
                         </button>
                     </div>
                 </form>
@@ -281,9 +287,26 @@ require('inc/navbar.php');
                 pn.focus();
 
             } else {
+                document.getElementById('tipe_generate').value = '1';
+
                 // set namespace in form on top
                 document.getElementById('namespace').value = pn.val();
 
+                document.getElementById('frm_def').submit();
+            }
+        });
+
+        // submit form generate to directory app
+        $('#create').on('click', function () {
+            var pn = $('#proc_namespace');
+            if (pn.val() == '' || pn.val() == null) {
+                alert('please input namespace!');
+                pn.focus();
+
+            } else {
+                document.getElementById('tipe_generate').value = '2';
+                // set namespace in form on top
+                document.getElementById('namespace').value = pn.val();
                 document.getElementById('frm_def').submit();
             }
         });

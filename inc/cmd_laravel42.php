@@ -4,7 +4,9 @@ set_error_handler("errorMessage");
 // generate migrate
 function CmdMigrate(array $data, $namespace)
 {
+    // field for params msg validate
     $result = '';
+    $no = 1;
     foreach ($data as $row) {
         $string = '';
         $opt = empty($row['optional']) ? null : $row['optional'];
@@ -19,14 +21,31 @@ function CmdMigrate(array $data, $namespace)
             }
         }
 
-        $result .= "\t\$table->" . $row['jenis'] . "('" . $row['name'] . "')" . $string . ";\n";
+        if ($no == 1) {
+            $result .= "\$table->" . $row['jenis'] . "('" . $row['name'] . "')" . $string . ";";
+
+        } else {
+            $result .= "\n\t\t\$table->" . $row['jenis'] . "('" . $row['name'] . "')" . $string . ";";
+        }
+
+        $no ++;
     }
 
-    // last result
-    $nm_table = fixNamescape($namespace, 5);
-    $lastResult = "Schema::create('" . $nm_table . "', function (\$table) {\n\t\$table->engine = 'InnoDB';\n\t\$table->string('_id');\n" . $result . "\t\$table->string('user_id');\n\t\$table->string('organisasi_id')->nullable()->default(null);\n\t\$table->string('user_creator')->nullable()->default(null);\n\t\$table->string('user_updater')->nullable()->default(null);\n\t\$table->timestamps();\n\t\$table->primary('_id');\n\t\$table->softDeletes();\n}";
+    // open templates
+    $template = 'templates/migrate.txt';
 
-    return $lastResult;
+    $fh = fopen($template, 'r');
+    $txtRead = '';
+    while ($line = fgets($fh)) {
+
+        // replace character
+        $txtRead .= RegexMigrate($line, $namespace, $result);
+    }
+
+    fclose($fh);
+
+    // result
+    return $txtRead;
 }
 
 // generate controller
@@ -46,8 +65,6 @@ function CmdController(array $data, $namespace)
         $no ++;
     }
 
-    $fieldLara = $result;
-
     // open templates
     $template = 'templates/controller.txt';
 
@@ -56,7 +73,7 @@ function CmdController(array $data, $namespace)
     while ($line = fgets($fh)) {
 
         // replace character
-        $txtRead .= RegexController($line, $namespace, $fieldLara);
+        $txtRead .= RegexController($line, $namespace, $result);
     }
 
     fclose($fh);
@@ -102,8 +119,6 @@ function CmdRepository(array $data, $namespace)
         $no ++;
     }
 
-    $fieldLara = $result;
-
     // open templates
     $template = 'templates/repository.txt';
 
@@ -112,7 +127,7 @@ function CmdRepository(array $data, $namespace)
     while ($line = fgets($fh)) {
 
         // replace character
-        $txtRead .= RegexRepository($line, $namespace, $fieldLara);
+        $txtRead .= RegexRepository($line, $namespace, $result);
     }
 
     fclose($fh);
@@ -143,7 +158,6 @@ function CmdModel(array $data, $namespace)
     }
 
     $result .= "\n\t'user_id',\n\t'organisasi_id',";
-    $fieldLara = $result;
 
     // open templates
     $template = 'templates/model.txt';
@@ -153,7 +167,7 @@ function CmdModel(array $data, $namespace)
     while ($line = fgets($fh)) {
 
         // replace character
-        $txtRead .= RegexModel($line, $namespace, $fieldLara, $search);
+        $txtRead .= RegexModel($line, $namespace, $result, $search);
     }
 
     fclose($fh);
@@ -209,11 +223,6 @@ function CmdRequest(array $data, $namespace)
         $no ++;
     }
 
-    // combine result
-    $rules = $res_rules;
-    $attr = $res_attr;
-    $input = $res_input;
-
     // open templates
     $template = 'templates/request.txt';
 
@@ -222,13 +231,24 @@ function CmdRequest(array $data, $namespace)
     while ($line = fgets($fh)) {
 
         // replace character
-        $txtRead .= RegexRequest($line, $namespace, $rules, $attr, $input);
+        $txtRead .= RegexRequest($line, $namespace, $res_rules, $res_attr, $res_input);
     }
 
     fclose($fh);
 
     // result
     return $txtRead;
+}
+
+// method regex laravel templates for templates migrate
+function RegexMigrate($str, $namespace, $field)
+{
+
+    $patterns = ['/{{namespace}}/', '/{{var_table}}/', '/{{var_field}}/'];
+    $replacements = [fixNamescape($namespace, 1), fixNamescape($namespace, 5), $field];
+
+    // add string text
+    return preg_replace($patterns, $replacements, $str);
 }
 
 // method regex laravel templates for templates controller
@@ -355,4 +375,28 @@ function fixNamescape($str, $jenis = 0)
             return $str;
     }
 
+}
+
+function CreateWriteFile($dir, $fileName, $string, $extension = 'php')
+{
+    // Check is exist directory
+    if (!file_exists($dir)) {
+        //  create directory and stop if failed
+        mkdir($dir, 0777, true) or die('Cannot create folder ' . $dir);
+    }
+
+    if (empty($fileName)) {
+        die('Please input specific name!');
+    }
+
+    // check empty and fix if extension has dot (.)
+    // $ext = empty($extension) ? 'php' : preg_replace('/./', '', $extension);
+
+    $newFileName = $dir . $fileName . "." . $extension;
+
+    if (file_put_contents($newFileName, $string) != false) {
+        return "Success create file " . $fileName . "\nYou can check your directory in " . $dir;
+    } else {
+        return "Cannot create file " . $fileName;
+    }
 }
