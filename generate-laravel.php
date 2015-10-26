@@ -43,6 +43,7 @@ require('inc/navbar.php');
                             <input type="hidden" id="def_length" name="def_length" value="1">
                             <input type="hidden" id="is_process" name="is_process" value="all">
                             <input type="hidden" id="namespace" name="namespace">
+                            <input type="hidden" id="prefix" name="prefix">
                             <!-- Type Generate 1: on this page; 2= create to app -->
                             <input type="hidden" id="tipe_generate" name="tipe_generate" value="1">
 
@@ -112,7 +113,9 @@ require('inc/navbar.php');
                         </select>
                         <label for="proc_namespace" class="sr-only">Namespace</label>
                         <input id="proc_namespace" name="proc_namespace" type="text" class="form-control input-expand"
-                               placeholder="Namespace" required="required" style="margin-right: 10px">
+                               placeholder="Namespace" required="required" style="margin-right: 10px; width:230px">
+                        <input id="proc_prefix" name="proc_prefix" type="text" class="form-control input-expand"
+                               placeholder="Prefix" required="required" style="margin-right: 10px; width:215px">
                         <button name="generate" id="generate" type="button" class="btn btn-primary btn-lg"
                                 style="margin-top: -5px; margin-right: 5px">
                             Start Generate
@@ -276,6 +279,8 @@ require('inc/navbar.php');
 <script>
     $(document).ready(function () {
         var pt = $('#proc_type');
+        var pp = $('#proc_prefix');
+
         $('#nav_laravel').addClass('active');
         document.getElementById('is_process').value = pt.val();
 
@@ -291,6 +296,8 @@ require('inc/navbar.php');
 
                 // set namespace in form on top
                 document.getElementById('namespace').value = pn.val();
+                // set prefix in form on top
+                document.getElementById('prefix').value = pp.val();
 
                 document.getElementById('frm_def').submit();
             }
@@ -307,6 +314,8 @@ require('inc/navbar.php');
                 document.getElementById('tipe_generate').value = '2';
                 // set namespace in form on top
                 document.getElementById('namespace').value = pn.val();
+                // set prefix in form on top
+                document.getElementById('prefix').value = pp.val();
                 document.getElementById('frm_def').submit();
             }
         });

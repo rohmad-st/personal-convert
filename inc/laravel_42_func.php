@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $length = $_POST['def_length'];
     $process = $_POST['is_process'];
     $namespace = $_POST['namespace'];
+    $prefix = $_POST['prefix'];
     $tipe_generate = $_POST['tipe_generate'];
 
     $lastResult = [];
@@ -48,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         case 2:
             // Generate to directory
-            $hasil = GenerateToDir($process, $lastResult, $namespace);
+            $hasil = GenerateToDir($process, $lastResult, $namespace, $prefix);
             $resultMigrate = $hasil['resultMigrate'];
             $resultController = $hasil['resultController'];
             $resultInterface = $hasil['resultInterface'];
@@ -122,17 +123,21 @@ function GenerateOnPage($process, $lastResult, $namespace)
     ];
 }
 
-function GenerateToDir($process, $lastResult, $namespace)
+function GenerateToDir($process, $lastResult, $namespace, $prefix)
 {
     // Open setting.ini
     $iniFile = parse_ini_file("setting.ini", true) or die('Cannot open file setting.ini');
 
+    // prefix/group
+    $pref = fixNamescape($prefix, 1) . '/';
+    $group = empty($prefix) ? null : $pref;
+
     // location
     $loc_migrate = $iniFile['location']['migrate'];
-    $loc_controller = $iniFile['location']['controller'];
-    $loc_interface = $iniFile['location']['interface'];
-    $loc_repository = $iniFile['location']['repository'];
-    $loc_request = $iniFile['location']['request'];
+    $loc_controller = $iniFile['location']['controller'] . $group;
+    $loc_interface = $iniFile['location']['interface'] . $group;
+    $loc_repository = $iniFile['location']['repository'] . $group;
+    $loc_request = $iniFile['location']['request'] . $group;
     $loc_model = $iniFile['location']['model'];
 
     // Default Name. result: NameSpace
