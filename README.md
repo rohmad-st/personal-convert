@@ -4,7 +4,8 @@ Tool sederhana untuk keperluan di kantor kami.
 
 Fitur:
 - convert file CSV ke bentuk Seeder laravel
-- generate migrate, controller, interface, repository, request, model for laravel 4.2 (code sesuai standart di kantor)
+- generate migrate, controller, interface, repository, request, model for laravel 4.2 (code sesuai standar di kantor)
+bisa generate di halaman ataupun langsung ke folder aplikasi
 - generate fpdf (under maintenance)
 
 Info:
