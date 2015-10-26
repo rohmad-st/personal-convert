@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $length = $_POST['def_length'];
     $process = $_POST['is_process'];
     $namespace = $_POST['namespace'];
-    $prefix = $_POST['prefix'];
+    $prefix = empty($_POST['prefix']) ? $namespace : $_POST['prefix'];
     $tipe_generate = $_POST['tipe_generate'];
 
     $lastResult = [];
@@ -128,9 +128,12 @@ function GenerateToDir($process, $lastResult, $namespace, $prefix)
     // Open setting.ini
     $iniFile = parse_ini_file("setting.ini", true) or die('Cannot open file setting.ini');
 
+    // Default Name. result: NameSpace
+    $nm = fixNamescape($namespace, 1);
+
     // prefix/group
-    $pref = fixNamescape($prefix, 1) . '/';
-    $group = empty($prefix) ? null : $pref;
+    $pref = fixNamescape($prefix, 1);
+    $group = empty($prefix) ? $nm . '/' : $pref . '/';
 
     // location
     $loc_migrate = $iniFile['location']['migrate'];
@@ -139,9 +142,6 @@ function GenerateToDir($process, $lastResult, $namespace, $prefix)
     $loc_repository = $iniFile['location']['repository'] . $group;
     $loc_request = $iniFile['location']['request'] . $group;
     $loc_model = $iniFile['location']['model'];
-
-    // Default Name. result: NameSpace
-    $nm = fixNamescape($namespace, 1);
 
     // result: 2015_10_26_171248_create_table_nama_tabel
     $nm_migrate = date('Y_m_d_His') . '_create_table_' . fixNamescape($namespace, 5);
