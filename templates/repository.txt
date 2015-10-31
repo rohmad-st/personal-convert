@@ -87,7 +87,8 @@ class {{namespace}}Repository extends AbstractRepository implements {{namespace}
             ${{var_namespace}} = $this->getNew();
 
             {{var_field}}
-
+            ${{var_namespace}}->user_id = e($data['user_id']);
+            ${{var_namespace}}->organisasi_id = e($data['organisasi_id']);
             ${{var_namespace}}->save();
 
             return $this->successInsertResponse();
@@ -111,6 +112,7 @@ class {{namespace}}Repository extends AbstractRepository implements {{namespace}
     {
         try {
             {{var_field}}
+            ${{var_namespace}}->user_id = e($data['user_id']);
             ${{var_namespace}}->save();
 
             return $this->successUpdateResponse();
