@@ -19,6 +19,8 @@ class CreateTable{{namespace}} extends Migration
                 $table->string('_id');
                 {{var_field}}
 
+                $table->string('user_id');
+                $table->string('organisasi_id')->nullable()->default(null);
                 $table->string('user_creator')->nullable()->default(null);
                 $table->string('user_updater')->nullable()->default(null);
                 $table->timestamps();
