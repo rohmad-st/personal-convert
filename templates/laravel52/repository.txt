@@ -1,4 +1,4 @@
-<?php namespace AppDesa\Repositories\Eloquent\{{prefix}};
+<?php namespace App\Domain\Repositories\{{prefix}};
 
 use App\Domain\Contracts\Cacheable;
 use App\Domain\Contracts\Crudable;

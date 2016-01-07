@@ -1,4 +1,4 @@
-<?php namespace AppDesa\Models;
+<?php namespace App\Domain\Entities\{{prefix}};
 
 use App\Domain\Entities\UuidModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
