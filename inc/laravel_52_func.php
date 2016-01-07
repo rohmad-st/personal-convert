@@ -129,7 +129,7 @@ function GenerateToDir($process, $lastResult, $namespace, $prefix)
     $loc_controller = $iniFile['location_l5']['controller'] . $group;
     $loc_repository = $iniFile['location_l5']['repository'] . $group;
     $loc_request = $iniFile['location_l5']['request'] . $group;
-    $loc_model = $iniFile['location_l5']['model'];
+    $loc_model = $iniFile['location_l5']['model']. $group;
 
     // result: 2015_10_26_171248_create_table_nama_tabel
     $nm_migrate = date('Y_m_d_His') . '_create_table_' . fixNamescape($namespace, 5);
