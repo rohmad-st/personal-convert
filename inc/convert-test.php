@@ -10,10 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $tmpName = $_FILES['csv']['tmp_name'];
     }
 
-//    $namespace = $_POST['namespace'];
-//    $prefix = empty($_POST['prefix']) ? $namespace : $_POST['prefix'];
-//    $tipe_generate = $_POST['tipe_generate'];
-
     // nama tabel
     $tableName = $_POST['tbl_name'];
 
@@ -63,6 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $json = json_encode($hasil);
 
         // return with beauty json format
-        $hasilAkhir = prettyJson($json, $tableName);
+        echo prettyJson($json, $tableName);
     }
 }

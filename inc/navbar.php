@@ -14,6 +14,7 @@
             <ul class="nav navbar-nav">
                 <li id="nav_seed"><a href="/">Seed</a></li>
                 <li id="nav_laravel"><a href="generate-laravel.php">Generate Laravel 4.2</a></li>
+                <li id="nav_laravel5"><a href="generate-laravel-5.php">Generate Laravel 5.2</a></li>
                 <li id="nav_fpdf"><a href="fpdf.php">Fpdf</a></li>
             </ul>
         </div>

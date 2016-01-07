@@ -75,7 +75,7 @@ function replaceString($string, $table = null)
 
     // add string text
     $res = preg_replace($patterns, $replacements, $string);
-    $hasil = "// truncate record\nDB::table('" . $tableName . "')->truncate();\n\n\$data"  . $res . ";\n\n// insert batch\nDB::table('" . $tableName . "')->insert(\$data);";
+    $hasil = "// truncate record\nDB::table('" . $tableName . "')->truncate();\n\n\$data = "  . $res . ";\n\n// insert batch\nDB::table('" . $tableName . "')->insert(\$data);";
 
     return $hasil;
 }
