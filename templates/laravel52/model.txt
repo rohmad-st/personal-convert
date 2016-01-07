@@ -1,5 +1,6 @@
 <?php namespace AppDesa\Models;
 
+use App\Domain\Entities\UuidModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class {{namespace}} extends UuidModel
