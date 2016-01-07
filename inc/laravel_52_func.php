@@ -125,11 +125,11 @@ function GenerateToDir($process, $lastResult, $namespace, $prefix)
     $group = empty($prefix) ? $nm . '/' : $pref . '/';
 
     // location
-    $loc_migrate = $iniFile['location']['migrate'];
-    $loc_controller = $iniFile['location']['controller'] . $group;
-    $loc_repository = $iniFile['location']['repository'] . $group;
-    $loc_request = $iniFile['location']['request'] . $group;
-    $loc_model = $iniFile['location']['model'];
+    $loc_migrate = $iniFile['location_l5']['migrate'];
+    $loc_controller = $iniFile['location_l5']['controller'] . $group;
+    $loc_repository = $iniFile['location_l5']['repository'] . $group;
+    $loc_request = $iniFile['location_l5']['request'] . $group;
+    $loc_model = $iniFile['location_l5']['model'];
 
     // result: 2015_10_26_171248_create_table_nama_tabel
     $nm_migrate = date('Y_m_d_His') . '_create_table_' . fixNamescape($namespace, 5);
