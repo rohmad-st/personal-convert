@@ -19,6 +19,8 @@ Atau bisa menggunakan cmd tanpa harus setting konfigurasi server local:
 - `php -S localhost:9090`
 - `buka browser localhost:9090`
 
+Jika muncul pesan failed to open stream: Permission denied
+ketikkan `sudo chmod -R 777 destination_folder`
 
 Contact Person: 
 - rohmadsasmito@gmail.com
