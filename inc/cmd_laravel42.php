@@ -207,7 +207,7 @@ function CmdRequest(array $data, $namespace, $prefix)
         $name = empty($row['name']) ? 'noname' : $row['name'];
 
         // name attributes
-        $nm = preg_replace('/_/', ' ', $name);
+        $nm = preg_replace(['/_id/', '/_/'], ['', ' '], $name);
         $nm_attr = ucwords(strtolower($nm));
         if ($no == 1) {
             $res_rules .= "\t'" . $name . "' => '" . $status . "',";
