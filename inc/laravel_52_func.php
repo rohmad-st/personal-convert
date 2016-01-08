@@ -84,7 +84,7 @@ function GenerateOnPage($process, $lastResult, $namespace, $prefix)
             break;
 
         case 'mod':
-            $resultModel = CmdModel($lastResult, $namespace);
+            $resultModel = CmdModel($lastResult, $namespace, $prefix);
             break;
 
         case 'all':
@@ -92,7 +92,7 @@ function GenerateOnPage($process, $lastResult, $namespace, $prefix)
             $resultController = CmdController($namespace, $prefix);
             $resultRepository = CmdRepository($lastResult, $namespace, $prefix);
             $resultRequest = CmdRequest($lastResult, $namespace, $prefix);
-            $resultModel = CmdModel($lastResult, $namespace);
+            $resultModel = CmdModel($lastResult, $namespace, $prefix);
             break;
 
         default:
@@ -129,7 +129,7 @@ function GenerateToDir($process, $lastResult, $namespace, $prefix)
     $loc_controller = $iniFile['location_l5']['controller'] . $group;
     $loc_repository = $iniFile['location_l5']['repository'] . $group;
     $loc_request = $iniFile['location_l5']['request'] . $group;
-    $loc_model = $iniFile['location_l5']['model']. $group;
+    $loc_model = $iniFile['location_l5']['model'] . $group;
 
     // result: 2015_10_26_171248_create_table_nama_tabel
     $nm_migrate = date('Y_m_d_His') . '_create_table_' . fixNamescape($namespace, 5);
@@ -167,7 +167,7 @@ function GenerateToDir($process, $lastResult, $namespace, $prefix)
             break;
 
         case 'mod':
-            $string = CmdModel($lastResult, $namespace);
+            $string = CmdModel($lastResult, $namespace, $prefix);
             $resultModel = CreateWriteFile($loc_model, $nm_model, $string);
             break;
 
@@ -184,7 +184,7 @@ function GenerateToDir($process, $lastResult, $namespace, $prefix)
             $string = CmdRequest($lastResult, $namespace, $prefix);
             $resultRequest = CreateWriteFile($loc_request, $nm_request, $string);
 
-            $string = CmdModel($lastResult, $namespace);
+            $string = CmdModel($lastResult, $namespace, $prefix);
             $resultModel = CreateWriteFile($loc_model, $nm_model, $string);
             break;
 

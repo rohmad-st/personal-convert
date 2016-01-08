@@ -19,7 +19,6 @@ class {{namespace}}Controller extends Controller
      */
     public function __construct({{namespace}}Repository ${{var_namespace}})
     {
-        parent::__construct();
         $this->{{var_namespace}} = ${{var_namespace}};
         $this->middleware('jwt.auth', ['except' => ['index']]);
     }

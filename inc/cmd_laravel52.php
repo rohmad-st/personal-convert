@@ -105,7 +105,7 @@ function CmdRepository(array $data, $namespace, $prefix)
 }
 
 // generate model
-function CmdModel(array $data, $namespace)
+function CmdModel(array $data, $namespace, $prefix)
 {
     // field for params msg validate
     $result = '';
@@ -135,7 +135,7 @@ function CmdModel(array $data, $namespace)
     while ($line = fgets($fh)) {
 
         // replace character
-        $txtRead .= RegexModel($line, $namespace, $result, $search);
+        $txtRead .= RegexModel($line, $namespace, $result, $search, $prefix);
     }
 
     fclose($fh);
@@ -256,7 +256,7 @@ function RegexRepository($str, $namespace, $field, $prefix, $search)
 }
 
 // method regex laravel templates for templates model
-function RegexModel($str, $namespace, $field, $search)
+function RegexModel($str, $namespace, $field, $search, $prefix)
 {
 
     $patterns = [
@@ -266,7 +266,8 @@ function RegexModel($str, $namespace, $field, $search)
         '/{{var_tags}}/',
         '/{{var_table}}/',
         '/{{var_fillable}}/',
-        '/{{var_search}}/'
+        '/{{var_search}}/',
+        '/{{prefix}}/'
     ];
     $replacements = [
         fixNamescape($namespace, 1),
@@ -275,7 +276,8 @@ function RegexModel($str, $namespace, $field, $search)
         fixNamescape($namespace, 4),
         fixNamescape($namespace, 5),
         $field,
-        $search
+        $search,
+        fixNamescape($prefix, 1)
     ];
 
     // add string text
