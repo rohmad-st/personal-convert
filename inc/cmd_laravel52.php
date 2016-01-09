@@ -162,10 +162,10 @@ function CmdRequest(array $data, $namespace, $prefix)
                 $status = 'required|max:255';
                 break;
             case 'integer':
-                $status = 'required|integer';
+                $status = 'required|integer|max:10000000000';
                 break;
             case 'double':
-                $status = 'required|numeric|max:2000000000';
+                $status = 'required|numeric|max:10000000000';
                 break;
             case 'smallInteger':
                 $status = 'required|integer|max:10';
