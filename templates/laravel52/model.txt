@@ -100,6 +100,6 @@ class {{namespace}} extends UuidModel
      */
     public function organisasi()
     {
-        return $this->belongsTo('App\Domain\Entities\Organisasi', 'organisasi_id');
+        return $this->belongsTo('App\Domain\Entities\Wilayah\Organisasi', 'organisasi_id');
     }
 }

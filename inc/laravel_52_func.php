@@ -135,7 +135,7 @@ function GenerateToDir($process, $lastResult, $namespace, $prefix)
     $nm_migrate = date('Y_m_d_His') . '_create_table_' . fixNamescape($namespace, 5);
     $nm_controller = $nm . 'Controller';
     $nm_repository = $nm . 'Repository';
-    $nm_request = $nm . 'CreateForm';
+    $nm_request = $nm . 'FormRequest';
     $nm_model = $nm;
 
     $resultMigrate = '';
