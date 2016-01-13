@@ -34,7 +34,7 @@ class {{namespace}}Repository extends AbstractRepository implements Crudable, Pa
         public function find($id, array $columns = ['*'])
         {
             // set key
-            $key = '{{var_namespace}}-find-' . $id;
+            $key = '{{var_tags}}-find-' . $id;
 
             // has section and key
             if ($this->cache->has({{namespace}}::$tags, $key)) {
@@ -99,7 +99,7 @@ class {{namespace}}Repository extends AbstractRepository implements Crudable, Pa
                 // store errors to log
                 Log::error('class : ' . {{namespace}}Repository::class . ' method : update | ' . $e);
 
-                return $this->createError();
+                return $this->updateError();
             }
         }
 
@@ -122,7 +122,7 @@ class {{namespace}}Repository extends AbstractRepository implements Crudable, Pa
                 // store errors to log
                 Log::error('class : ' . {{namespace}}Repository::class . ' method : delete | ' . $e);
 
-                return $this->createError();
+                return $this->deleteError();
             }
         }
 
@@ -138,7 +138,7 @@ class {{namespace}}Repository extends AbstractRepository implements Crudable, Pa
         public function getByPage($limit = 10, $page = 1, array $column = ['*'], $field, $search = '')
         {
             // set key
-            $key = '{{var_namespace}}-get-by-page-' . $page . $limit . $search;
+            $key = '{{var_tags}}-get-by-page-' . $page . $limit . $search;
 
             // has section and key
             if ($this->cache->has({{namespace}}::$tags, $key)) {
